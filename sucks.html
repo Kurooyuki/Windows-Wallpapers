@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Wallpaper Library</title>
+    <style>
+        :root {
+            --win-blue: #0078d4;
+            --dark-side: #1a1a1a;
+            --bg-light: #f4f7f9;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR NAVIGATION --- */
+        #sidebar {
+            width: 280px;
+            background: var(--dark-side);
+            color: white;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+
+        #sidebar h2 {
+            padding: 25px 20px;
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--win-blue);
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-container {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-btn {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            color: #aaa;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background: #252525;
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: #2a2a2a;
+            color: white;
+            border-left: 4px solid var(--win-blue);
+        }
+
+        /* --- MAIN CONTENT --- */
+        #main-content {
+            flex-grow: 1;
+            padding: 40px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background-color: #e0e0e0;
+        }
+
+        .card-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .filename {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dl-link {
+            display: block;
+            background: var(--win-blue);
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .dl-link:hover {
+            opacity: 0.8;
+        }
+
+        /* --- RESPONSIVE LAYOUT (MOBILE) --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            #sidebar h2 { padding: 15px; text-align: center; font-size: 1rem; }
+            .nav-container {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .nav-btn {
+                width: auto;
+                padding: 12px 20px;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            .nav-btn.active {
+                border-left: none;
+                border-bottom: 3px solid var(--win-blue);
+            }
+            #main-content { padding: 20px; }
+            header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar">
+    <h2>Windows Library</h2>
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="showCategory('w11', this)">Windows 11</button>
+        <button class="nav-btn" onclick="showCategory('w10', this)">Windows 10</button>
+        <button class="nav-btn" onclick="showCategory('w8', this)">Windows 8</button>
+        <button class="nav-btn" onclick="showCategory('w7', this)">Windows 7</button>
+        <button class="nav-btn" onclick="showCategory('vista', this)">Vista</button>
+        <button class="nav-btn" onclick="showCategory('xp', this)">Windows XP</button>
+    </div>
+</div>
+
+<div id="main-content">
+    <header>
+        <h1 id="cat-title">Windows 11 Wallpapers</h1>
+    </header>
+    
+    <div id="gallery" class="gallery-grid">
+        </div>
+</div>
+
+<script>
+    const wallpaperData = {
+        w11: {
+            folder: "Windows11",
+            files: [
+                "win11defaultdark.jpg", "win11defaultlight.jpg", "wp9433081-windows-11-dark-wallpapers.jpg",
+                "wp9480368-4k-windows-11-wallpapers.jpg", "wp9649952-windows-11-dark-wallpapers.jpg",
+                "wp9649963-windows-11-dark-wallpapers.jpg", "wp10128645-windows-11-desktop-wallpapers.jpg",
+                "wp10450207-chromebook-11-wallpapers.jpg", "wp10547826-windows-11-glow-wallpapers.jpg",
+                "wp10547830-windows-11-glow-wallpapers.jpg"
+            ]
+        },
+        w10: {
+            folder: "Windows10",
+            files: [
+                "oldwin10wallpaper.jpg", "Windows-10-S-1703-Wallpaper.webp", "Windows10_TechnicalPreview_b10041_Img0.webp",
+                "Windows_10_365_default_wallpaper.webp", "wp2543305-microsoft-windows-10-wallpapers.jpg",
+                "wp8351447-windows-10-default-wallpapers.jpg", "wp8351452-windows-10-default-wallpapers.jpg",
+                "wp8351516-windows-10-default-wallpapers.jpg", "wp8351604-windows-10-default-wallpapers.jpg",
+                "wp8351678-windows-10-default-wallpapers.jpg"
+            ]
+        },
+        w8: {
+            folder: "Windows8",
+            files: [
+                "oWUrlai-windows-8-wallpapers.png", "win8defaultwallpaper.jpg", "wp3468099-windows-8-official-wallpapers.jpg",
+                "wp3468100-windows-8-official-wallpapers.jpg", "wp3468103-windows-8-official-wallpapers.jpg",
+                "wp3468108-windows-8-official-wallpapers.jpg", "wp3468109-windows-8-official-wallpapers.jpg",
+                "wp3468111-windows-8-official-wallpapers.jpg", "wp3468118-windows-8-official-wallpapers.jpg",
+                "wp3468125-windows-8-official-wallpapers.jpg"
+            ]
+        },
+        w7: {
+            folder: "Windows7",
+            files: [
+                "DQ6fnyG-windows-7-official-wallpapers.jpg", "etn12mw-windows-7-official-wallpapers.jpg", "FQkykXE-windows-7-official-wallpapers.jpg",
+                "nkFdYBQ-windows-7-official-wallpapers.jpg", "oVgsDTm-windows-7-official-wallpapers.jpg", "vcCpXuf-windows-7-official-wallpapers.jpg",
+                "win7.jpg", "XAocl3Z-windows-7-official-wallpapers.jpg", "xrkXPYf-windows-7-official-wallpapers.jpg", "Z0Ts3J2-windows-7-official-wallpapers.jpg"
+            ]
+        },
+        vista: {
+            folder: "WindowsVista",
+            files: [
+                "10TbY8R-window-vista-wallpaper.jpg", "dG1rpwG-windows-vista-backgrounds.jpg", "EkojXL0-vista-wallpapers.jpg",
+                "GvUkLlk-window-vista-wallpaper.jpg", "IooPgL8-vista-background.jpg", "l0AHEp5-window-vista-wallpaper.jpg",
+                "LforfDO-window-vista-wallpaper.jpg", "winvista.jpg", "XOEg4t3-windows-vista-backgrounds.jpg",
+                "xWM8iEj-windows-vista-wallpaper.jpg"
+            ]
+        },
+        xp: {
+            folder: "WindowsXP",
+            files: [
+                "wp14036083-windows-xp-logo-wallpapers.png", "wp14970824-old-windows-hd-wallpapers.webp", "wp14979152-windows-xp-default-wallpapers.webp",
+                "wp15552988-windows-xp-default-wallpapers.jpg", "wp15553138-windows-xp-default-wallpapers.jpg", "wp15553146-windows-xp-default-wallpapers.jpg",
+                "wp15553148-windows-xp-default-wallpapers.png", "wp15553239-windows-xp-default-wallpapers.jpg", "xp-anime-nature-4k-autumn-wallpapers.jpg",
+                "xpbliss.jpg"
+            ]
+        }
+    };
+
+    function showCategory(key, btn) {
+        const gallery = document.getElementById('gallery');
+        const title = document.getElementById('cat-title');
+        const data = wallpaperData[key];
+
+        // Highlight tombol navigasi
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update Judul
+        title.innerText = btn.innerText + " Wallpapers";
+
+        // Render Gambar
+        gallery.innerHTML = '';
+        
+        data.files.forEach(fileName => {
+            const fullPath = `${data.folder}/${fileName}`;
+            
+            gallery.innerHTML += `
+                <div class="card">
+                    <img src="${fullPath}" alt="${fileName}" loading="lazy" 
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/400x225?text=File+Not+Found';">
+                    <div class="card-info">
+                        <span class="filename">${fileName}</span>
+                        <a href="${fullPath}" class="dl-link" download="${fileName}">Download</a>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Auto-scroll ke atas (untuk mobile)
+        if(window.innerWidth <= 768) {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    // Tampilkan Windows 11 saat web pertama kali dimuat
+    window.onload = () => {
+        showCategory('w11', document.querySelector('.nav-btn'));
+    };
+</script>
+<footer>
+   THE WEBSITE MADE BY KUROYUKIYOUTUBE
+    <div>
+    *Note:I am not the owner of these images; all of them were created by Microsoft and other people who designed the wallpapers.
+<div>
+    
+</div>
+</footer>
+
+</body>
+</html>
