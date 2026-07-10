@@ -1,40 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   body {
     background-color: #000;
     color: #fff;
     text-align: center;
-    font-family: sans-serif;
-    overflow: hidden; /* Mencegah scroll bar muncul */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
+    overflow: hidden; /* Mencegah scrollbar */
   }
 
   .credits-container {
     position: absolute;
-    width: 90%; /* Memberi sedikit ruang di kiri/kanan */
+    width: 90%;
+    max-width: 600px;
     white-space: pre-line;
-    /* Animasi: 15 detik, linear, dan diulang terus menerus */
-    animation: scroll 15s linear infinite;
+    /* Durasi 30 detik agar sangat slow dan bisa dibaca jelas */
+    animation: scroll 30s linear infinite;
+    padding-top: 100vh; /* Mulai dari bawah layar */
   }
 
   @keyframes scroll {
-    0% { transform: translateY(100vh); }
-    100% { transform: translateY(-100%); }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-200vh); }
   }
 
-  h1 { color: #aaa; font-size: 8vw; }
-  p { margin: 20px 0; font-size: 5vw; line-height: 1.6; }
+  h1 { color: #aaa; font-size: 2rem; margin-bottom: 20px; }
+  p { margin: 15px 0; font-size: 1.2rem; line-height: 1.8; }
+  b { color: #fff; display: block; margin-top: 5px; }
 
-  /* Pengaturan untuk komputer agar teks tidak terlalu lebar/besar */
-  @media (min-width: 768px) {
-    h1 { font-size: 40px; }
-    p { font-size: 20px; }
+  /* Agar font tetap proporsional di semua perangkat */
+  @media (max-width: 600px) {
+    h1 { font-size: 1.5rem; }
+    p { font-size: 1rem; }
   }
 </style>
 </head>
