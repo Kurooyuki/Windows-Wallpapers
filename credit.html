@@ -1,56 +1,57 @@
-‎<!DOCTYPE html>
-‎<html>
-‎<head>
-‎<style>
-‎  body {
-‎    background-color: #000;
-‎    color: #fff;
-‎    text-align: center;
-‎    font-family: sans-serif;
-‎    overflow: hidden;
-‎    margin: 0;
-‎  }
-‎
-‎  .credits-container {
-‎    position: absolute;
-‎    width: 100%;
-‎    /* Efek animasi: durasi 10s, linear (konstan), berjalan terus */
-‎    animation: scroll 10s linear forwards;
-‎  }
-‎
-‎  @keyframes scroll {
-‎    0% { transform: translateY(100vh); }
-‎    100% { transform: translateY(-100%); }
-‎  }
-‎
-‎  h1 { color: #aaa; }
-‎  p { margin: 10px 0; font-size: 20px; }
-‎</style>
-‎</head>
-‎<body>
-‎
-‎  <div class="credits-container">
-‎    <h1>CREDITS</h1>
-‎    <p>Microsoft Corporation</p>
-‎    <p><b>Six N. Fiv
-‎Bradley G. Munkowitz
-‎Michael Shainblum
-‎Alistair Campbell
-‎Matt Anderson
-‎Corey Rich
-‎Grant Thomas
-‎Klaus Haapaniemi
-‎Charles O'Rear</b></p>
-‎    <br>
-‎    <p>WallpaperHub
-‎Reddit
-‎DeviantArt</p>
-‎    <p><b>Wallpaper Cave
-‎Wallpaper Flare
-‎Archive.org</b></p>
-‎    <br>
-‎    <p>Special Thanks To Github</p>
-‎  </div>
-‎
-‎</body>
-‎</html>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .credits-container {
+    position: absolute;
+    width: 100%;
+    /* Menjaga format teks sesuai yang diketik (Enter terbaca) */
+    white-space: pre-line; 
+    animation: scroll 12s linear forwards;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-100%); }
+  }
+
+  h1 { color: #aaa; margin-top: 50vh; }
+  p { margin: 15px 0; font-size: 20px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+  <div class="credits-container">
+    <h1>CREDITS</h1>
+    <p>Microsoft Corporation</p>
+    <p><b>Six N. Fiv
+Bradley G. Munkowitz
+Michael Shainblum
+Alistair Campbell
+Matt Anderson
+Corey Rich
+Grant Thomas
+Klaus Haapaniemi
+Charles O'Rear</b></p>
+    
+    <p>WallpaperHub
+Reddit
+DeviantArt
+<b>Wallpaper Cave
+Wallpaper Flare
+Archive.org</b></p>
+    
+    <p>Special Thanks To Github</p>
+  </div>
+
+</body>
+</html>
