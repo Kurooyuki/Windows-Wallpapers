@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   body {
     background-color: #000;
     color: #fff;
     text-align: center;
     font-family: sans-serif;
-    overflow: hidden;
+    overflow: hidden; /* Mencegah scroll bar muncul */
     margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
   }
 
   .credits-container {
     position: absolute;
-    width: 100%;
-    /* Menjaga format teks sesuai yang diketik (Enter terbaca) */
-    white-space: pre-line; 
-    animation: scroll 12s linear forwards;
+    width: 90%; /* Memberi sedikit ruang di kiri/kanan */
+    white-space: pre-line;
+    /* Animasi: 15 detik, linear, dan diulang terus menerus */
+    animation: scroll 15s linear infinite;
   }
 
   @keyframes scroll {
@@ -24,8 +28,14 @@
     100% { transform: translateY(-100%); }
   }
 
-  h1 { color: #aaa; margin-top: 50vh; }
-  p { margin: 15px 0; font-size: 20px; line-height: 1.5; }
+  h1 { color: #aaa; font-size: 8vw; }
+  p { margin: 20px 0; font-size: 5vw; line-height: 1.6; }
+
+  /* Pengaturan untuk komputer agar teks tidak terlalu lebar/besar */
+  @media (min-width: 768px) {
+    h1 { font-size: 40px; }
+    p { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
