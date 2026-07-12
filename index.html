@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Wallpaper Archive</title>
+    <style>
+        :root {
+            --win-blue: #0078d4;
+            --glass: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #cccccc;
+        }
 
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            margin: 0;
+            background: #060606;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at 70% 30%, #005a9e, #000000);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            text-align: center;
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 { font-size: 3rem; margin: 0 0 20px; letter-spacing: -1px; }
+        p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary { background: white; color: #000; }
+        .btn-primary:hover { transform: translateY(-4px); background: #eee; }
+        .btn-outline { color: white; background: rgba(255, 255, 255, 0.05); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.15); }
+
+        .note { font-size: 0.85rem; color: #888; font-style: italic; margin-top: 20px; }
+
+        footer { padding: 40px 20px; background: #0a0a0a; text-align: center; border-top: 1px solid #222; }
+        .disclaimer { max-width: 800px; margin: 0 auto; color: #777; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <main class="hero-container">
+        <div class="hero-content">
+            <h1>Windows Wallpaper Archive</h1>
+            <p>Historical collection of official desktop wallpapers. Relive the nostalgia from Windows XP to the modern Windows 11 aesthetic.</p>
+            
+            <div class="cta-grid">
+                <a href="wallpaper.html" class="btn btn-primary">Browse Gallery</a>
+                <a href="download.html" class="btn btn-primary">Download (.ZIP)</a>
+                <a href="https://github.com/Kurooyuki/Windows-Wallpapers/" class="btn btn-outline">Source Code</a>
+                <a href="credit.html" class="btn btn-outline">Credits</a>
+            </div>
+
+            <p class="note">*Note: This archive includes both official assets and community-created tributes.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> This website is an independent archive created for educational purposes. I do not own the license or copyrights for these images. All trademarks and assets are the property of Microsoft Corporation.
+            <p>&copy; 2026 Windows Wallpaper Archive Project.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
