@@ -11,8 +11,8 @@
             --bg-light: #f3f3f3;
             --text-dark: #333333;
             
-            /* Variabel Default (Light Mode) */
-            --container-bg: white;
+            /* Variabel Light Mode */
+            --container-bg: #ffffff;
             --body-bg: var(--bg-light);
             --main-text: var(--text-dark);
             --heading-text: var(--win-dark);
@@ -25,7 +25,7 @@
             --note-text: var(--text-dark);
         }
 
-        /* Variabel saat Class .dark-mode aktif via JavaScript */
+        /* Variabel Dark Mode */
         body.dark-mode {
             --container-bg: #202020;
             --body-bg: #111111;
@@ -42,11 +42,12 @@
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0;
             background-color: var(--body-bg);
             color: var(--main-text);
             display: flex;
@@ -58,8 +59,9 @@
         .container {
             position: relative;
             max-width: 800px;
-            margin: 40px auto;
-            padding: 40px 20px 20px 20px; /* Ditambah padding atas untuk ruang tombol */
+            width: 90%; /* Fleksibel untuk layar tablet & HP */
+            margin: 20px auto;
+            padding: 55px 20px 30px 20px; /* Ruang cukup di atas untuk tombol theme */
             background: var(--container-bg);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -67,7 +69,7 @@
             transition: background-color 0.3s ease;
         }
 
-        /* --- TOMBOL MANUAL THEME TOGGLE --- */
+        /* --- TOGGLE THEME BUTTON --- */
         .theme-toggle-btn {
             position: absolute;
             top: 15px;
@@ -75,57 +77,62 @@
             background: var(--btn-sec-bg);
             color: var(--btn-sec-text);
             border: none;
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: all 0.2s ease;
+            z-index: 10;
         }
 
         .theme-toggle-btn:hover {
             background: var(--btn-sec-hover);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         h2 {
             color: var(--heading-text);
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             margin-bottom: 20px;
         }
 
         p.instruction {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            margin-bottom: 25px;
             opacity: 0.9;
+            line-height: 1.4;
         }
 
-        /* --- BUTTONS --- */
+        /* --- BUTTONS SECTION --- */
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 6px;
             transition: all 0.2s ease;
             cursor: pointer;
+            min-height: 44px; /* Standar ukuran minimal touch target HP */
         }
 
         .btn-primary {
             background-color: var(--win-blue);
-            color: white;
+            color: #ffffff;
             box-shadow: 0 2px 8px rgba(0, 120, 212, 0.3);
         }
 
@@ -144,36 +151,51 @@
             transform: translateY(-2px);
         }
 
+        .status-msg {
+            font-weight: 600;
+            color: #28a745;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
         /* --- VIDEO SECTION --- */
         .video-section {
-            margin: 40px 0;
-            padding-top: 20px;
+            margin-top: 30px;
+            padding-top: 25px;
             border-top: 1px solid var(--border-color);
         }
 
         .video-wrapper {
-            max-width: 100%;
-            width: 640px;
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            aspect-ratio: 16 / 9; /* Otomatis menyesuaikan rasio video di semua layar */
             margin: 0 auto 20px auto;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-color: #000;
         }
 
-        video {
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            display: block;
+            height: 100%;
+            border: 0;
         }
 
+        /* --- NOTE BOX --- */
         .note-box {
             max-width: 640px;
-            margin: 20px auto;
-            padding: 15px;
+            margin: 20px auto 0 auto;
+            padding: 14px 16px;
             background-color: var(--note-bg);
             border-left: 4px solid var(--note-border);
             border-radius: 0 6px 6px 0;
             text-align: left;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             color: var(--note-text);
         }
@@ -193,17 +215,41 @@
             background-color: #1a1a1a;
             color: #aaaaaa;
             text-align: center;
-            padding: 25px 20px;
+            padding: 20px;
             font-size: 0.85rem;
             margin-top: auto;
         }
 
-        /* --- RESPONSIVE ADJUSTMENTS --- */
+        /* --- OPTIMALISASI KHUSUS MOBILE (HP) --- */
         @media (max-width: 600px) {
-            .cta-buttons { flex-direction: column; gap: 10px; }
-            .btn { width: 100%; text-align: center; }
-            .note-box { text-align: center; border-left: none; border-top: 4px solid var(--note-border); border-radius: 6px; }
-            .container { padding-top: 60px; }
+            .container {
+                width: 94%;
+                margin: 10px auto;
+                padding: 60px 15px 20px 15px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%; /* Tombol memenuhi lebar layar HP */
+            }
+
+            .note-box {
+                text-align: center;
+                border-left: none;
+                border-top: 4px solid var(--note-border);
+                border-radius: 6px;
+            }
+
+            .theme-toggle-btn {
+                top: 12px;
+                right: 12px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -215,33 +261,30 @@
             <span id="toggleIcon">🌙</span> <span id="toggleText">Dark Mode</span>
         </button>
 
-        <p class="instruction">Choose one of these two links to download the Windows.zip file:</p>
+        <p class="instruction">Choose one of these links to download the Windows.zip file:</p>
         
         <!-- Barisan Tombol Download & Info -->
         <div class="cta-buttons">
-            <a href="https://github.com/Kurooyuki/Windows-Wallpapers/releases/download/WindowsWallpapers/Windows.zip" class="btn btn-primary" target="_blank">Github</a>
-            <a href="https://www.mediafire.com/file/9lnu5rphwod3lkd/Windows.zip/file?dkey=uzatr0ce2ee&r=1726" class="btn btn-primary" target="_blank">Mediafire</a>
+            <a href="https://github.com/Kurooyuki/Windows-Wallpapers/releases/download/WindowsWallpapers/Windows.zip" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Github</a>
+            <a href="https://www.mediafire.com/file/9lnu5rphwod3lkd/Windows.zip/file?dkey=uzatr0ce2ee&r=1726" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Mediafire</a>
             <a href="upscale.html" class="btn btn-primary" target="_blank">Upscale Version Here</a>
-            <a href="https://www.virustotal.com/gui/file/0325ab1755746e8e4ac018982d82e6d441ce12b243de79efd0f01861d7ae6681?nocache=1" class="btn btn-secondary" target="_blank">Scan Result From VirusTotal</a>
+            <a href="https://www.virustotal.com/gui/file/0325ab1755746e8e4ac018982d82e6d441ce12b243de79efd0f01861d7ae6681?nocache=1" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Scan Result From VirusTotal</a>
             <a href="index.html" class="btn btn-secondary">Back To Homepage</a>
         </div>
 
-        <p style="font-weight: 600; color: #28a745;">The File "Windows.zip" doesn't have a password.</p>
+        <p class="status-msg">The File "Windows.zip" doesn't have a password.</p>
 
         <!-- Section Video Tutorial -->
         <div class="video-section">
             <h2>How To Download And Use The Wallpapers</h2>
             
             <div class="video-wrapper">
-                <video controls>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/FTKYY5rfb9M?si=O9oPfY0fx8NZly50" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    Your browser does not support the video tag.
-                </video>
+                <iframe src="https://www.youtube.com/embed/FTKYY5rfb9M?si=O9oPfY0fx8NZly50" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
             <!-- Catatan Petunjuk Ekstraksi File -->
             <div class="note-box">
-                <strong>Important Note:</strong> You need an application to extract the file, such as <a href="https://www.win-rar.com/download.html" target="_blank">WinRAR</a> or <a href="https://www.7-zip.org/" target="_blank">7-Zip</a> to open the archive properly.
+                <strong>Important Note:</strong> You need an application to extract the file, such as <a href="https://www.win-rar.com/download.html" target="_blank" rel="noopener noreferrer">WinRAR</a> or <a href="https://www.7-zip.org/" target="_blank" rel="noopener noreferrer">7-Zip</a> to open the archive properly.
             </div>
         </div>
     </div>
@@ -256,7 +299,7 @@
         const toggleIcon = document.getElementById('toggleIcon');
         const toggleText = document.getElementById('toggleText');
         
-        // Cek apakah user punya setelan tersimpan di localStorage, jika tidak gunakan setelan sistem perangkat
+        // Cek setelan tersimpan di localStorage / prefers-color-scheme
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
@@ -267,14 +310,13 @@
             updateToggleUI(false);
         }
 
-        // Fungsi klik tombol manual
+        // Event Klik Toggle Theme
         themeToggleBtn.addEventListener('click', () => {
             const isDark = document.body.classList.toggle('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateToggleUI(isDark);
         });
 
-        // Mengubah teks & emoji tombol sesuai mode aktif
         function updateToggleUI(isDark) {
             if (isDark) {
                 toggleIcon.textContent = '☀️';
